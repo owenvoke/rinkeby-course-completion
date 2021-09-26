@@ -11,12 +11,12 @@ contract CourseCompletionPortal {
         console.log("This is the course completion smart contract");
     }
 
-    function wave() public {
+    function completeCourse() public {
         totalCompletions += 1;
         console.log("%s has completed the course!", msg.sender);
     }
 
-    function getTotalWaves() public view returns (uint256) {
+    function getTotalCourseCompletions() public view returns (uint256) {
         console.log("We have %d total course completions!", totalCompletions);
         return totalCompletions;
     }

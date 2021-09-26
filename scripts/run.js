@@ -7,18 +7,18 @@ const main = async () => {
     console.log("Contract deployed to:", CourseCompletionContract.address);
     console.log("Contract deployed by:", owner.address);
 
-    let waveCount;
-    waveCount = await CourseCompletionContract.getTotalWaves();
+    let courseCompletionCount;
+    courseCompletionCount = await CourseCompletionContract.getTotalCourseCompletions();
 
-    let waveTxn = await CourseCompletionContract.wave();
-    await waveTxn.wait();
+    let courseCompletionTxn = await CourseCompletionContract.completeCourse();
+    await courseCompletionTxn.wait();
 
-    waveCount = await CourseCompletionContract.getTotalWaves();
+    courseCompletionCount = await CourseCompletionContract.getTotalCourseCompletions();
 
-    waveTxn = await CourseCompletionContract.connect(randoPerson).wave();
-    await waveTxn.wait();
+    courseCompletionTxn = await CourseCompletionContract.connect(randoPerson).completeCourse();
+    await courseCompletionTxn.wait();
 
-    waveCount = await CourseCompletionContract.getTotalWaves();
+    courseCompletionCount = await CourseCompletionContract.getTotalCourseCompletions();
 };
 
 const runMain = async () => {
