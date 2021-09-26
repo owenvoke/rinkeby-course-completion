@@ -1,8 +1,24 @@
 const main = async () => {
-    const waveContractFactory = await hre.ethers.getContractFactory('WavePortal');
-    const waveContract = await waveContractFactory.deploy();
-    await waveContract.deployed();
-    console.log("Contract deployed to:", waveContract.address);
+    const [owner, randoPerson] = await hre.ethers.getSigners();
+    const courseCompletionPortalFactory = await hre.ethers.getContractFactory('CourseCompletionPortal');
+    const CourseCompletionContract = await courseCompletionPortalFactory.deploy();
+    await CourseCompletionContract.deployed();
+
+    console.log("Contract deployed to:", CourseCompletionContract.address);
+    console.log("Contract deployed by:", owner.address);
+
+    let waveCount;
+    waveCount = await CourseCompletionContract.getTotalWaves();
+
+    let waveTxn = await CourseCompletionContract.wave();
+    await waveTxn.wait();
+
+    waveCount = await CourseCompletionContract.getTotalWaves();
+
+    waveTxn = await CourseCompletionContract.connect(randoPerson).wave();
+    await waveTxn.wait();
+
+    waveCount = await CourseCompletionContract.getTotalWaves();
 };
 
 const runMain = async () => {
