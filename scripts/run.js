@@ -17,7 +17,7 @@ const main = async () => {
     );
 
     let courseCompletionCount;
-    courseCompletionCount = await CourseCompletionContract.getTotalCourseCompletions();
+    await CourseCompletionContract.getTotalCourseCompletions();
 
     let courseCompletionTxn = await CourseCompletionContract.completeCourse('My First Course...');
     await courseCompletionTxn.wait();
