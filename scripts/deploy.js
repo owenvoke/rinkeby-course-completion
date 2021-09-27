@@ -6,9 +6,12 @@ const main = async () => {
     console.log('Account balance: ', accountBalance.toString());
 
     const Token = await hre.ethers.getContractFactory('CourseCompletionPortal');
-    const portal = await Token.deploy();
+    const Contract = await Token.deploy({
+        value: hre.ethers.utils.parseEther('0.001'),
+    });
+    await Contract.deployed();
 
-    console.log('CourseCompletionPortal address: ', portal.address);
+    console.log('CourseCompletionPortal address: ', Contract.address);
 };
 
 const runMain = async () => {
